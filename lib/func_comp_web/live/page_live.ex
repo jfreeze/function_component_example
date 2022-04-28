@@ -23,7 +23,7 @@ defmodule FuncCompWeb.PageLive do
 
   def render_action(nil, assigns) do
     ~H"""
-    Example: <E.links />
+    Examples Start: <E.links />
     """
   end
 
