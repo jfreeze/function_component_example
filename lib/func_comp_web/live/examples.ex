@@ -7,7 +7,7 @@ defmodule FuncCompWeb.Live.Examples do
     <div>
       list: <%= inspect @list %>
     </div>
-    <.i {assigns}/>
+    <.i {assigns} title={"Assigns"}/>
     """
   end
 
@@ -18,7 +18,7 @@ defmodule FuncCompWeb.Live.Examples do
         <%= item %>
       </div>
     <% end %>
-    <.i {assigns}/>
+    <.i {assigns} title={"Assigns"}/>
     """
   end
 
@@ -27,7 +27,7 @@ defmodule FuncCompWeb.Live.Examples do
     <%= for item <- @list do %>
       <%= render_slot @inner_block, item %>
     <% end %>
-    <.i {assigns}/>
+    <.i {assigns} title={"Assigns"}/>
     """
   end
 
@@ -42,14 +42,15 @@ defmodule FuncCompWeb.Live.Examples do
       </table>
     </div>
     <div><%= render_slot(@header) %></div>
-    <.i {assigns}/>
+    <.i {assigns} title={"Assigns"}/>
     """
   end
 
   @spec i(map()) :: Phoenix.LiveView.Rendered.t()
   def i(assigns) do
     ~H"""
-    <div class="inspect">
+    <div class="inspect" style="padding:4px 6px;padding-bottom:32px;background-color:#f9f9f9;border-top: 1px solid #ccc;">
+      <h3><%= @title %></h3>
       <%= inspect assigns %>
     </div>
     """
