@@ -21,32 +21,31 @@ defmodule FuncCompWeb.PageLive do
     """
   end
 
+  def render_action(nil, assigns) do
+    ~H"""
+    Example: <E.links />
+    """
+  end
+
   def render_action(:a, assigns) do
     ~H"""
-      <div class="flex">
-        <E.links live_action={@live_action} />
-        <h1>Function Component</h1>
-      </div>
+      <.title live_action={@live_action}>A: Function Component</.title>
       <E.a list={@list}/>
     """
   end
 
   def render_action(:b, assigns) do
     ~H"""
-    <div class="flex">
-      <E.links live_action={@live_action} />
-      <h1>Function Component w/ Parameter List</h1>
-    </div>
+    <.title live_action={@live_action}>B: Function Component w/ Parameter List</.title>
+
     <E.b list={@list}/>
     """
   end
 
   def render_action(:c, assigns) do
     ~H"""
-    <div class="flex">
-      <E.links live_action={@live_action} />
-      <h1>Function Component - Render @inner_block over list</h1>
-    </div>
+    <.title live_action={@live_action}>C: Function Component - Render @inner_block over list</.title>
+
     <table>
       <E.c let={item} list={@list}>
         <tr><td><%= item %></td></tr>
@@ -57,16 +56,22 @@ defmodule FuncCompWeb.PageLive do
 
   def render_action(:d, assigns) do
     ~H"""
+    <.title live_action={@live_action}>D: Function Component w/ Custom Slot :header</.title>
+    <E.d let={row} list={@list}>
+      <:header>
+        This is a header
+      </:header>
+      <%= row %>
+    </E.d>
+    """
+  end
+
+  def title(assigns) do
+    ~H"""
     <div class="flex">
       <E.links live_action={@live_action} />
-      <h1>Function Component w/ Custom Slot :header</h1>
+      <h1><%= render_slot @inner_block %></h1>
     </div>
-      <E.d let={row} list={@list}>
-        <:header>
-          This is a header
-        </:header>
-        <%= row %>
-      </E.d>
     """
   end
 end

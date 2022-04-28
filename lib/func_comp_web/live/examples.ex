@@ -64,6 +64,14 @@ defmodule FuncCompWeb.Live.Examples do
     """
   end
 
+  def links(%{live_action: :d} = assigns) do
+    ~H"""
+    <span>
+      <%= live_redirect "c", to: Routes.page_path(FuncCompWeb.Endpoint, :c) %>
+    </span>&nbsp;&lt;-
+    """
+  end
+
   def links(%{live_action: live_action} = assigns) do
     [position] = to_charlist(live_action)
     prev = String.to_atom(<<position - 1>>)
